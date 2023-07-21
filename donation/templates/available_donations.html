@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>DonaWaste - Available Donations</title>
+  </head>
+  <body>
+    <h1>Available Donations</h1>
+
+    {% if not donations %}
+      Sorry, there aren't any available donations. Please check again later.
+    {% endif %}
+
+    {% for donation in donations %}
+      {% if donation.status == true %}
+        <h4>{{donation.title}}</h4>
+        Date and Time Created: {{donation.datetime_created}}<br>
+        Weight (grams): {{donation.weight_grams}}<br>
+        Address: {{donation.address}}<br>
+        Description: {{donation.description}}
+      {% endif %}
+    {% endfor %}
+
+  </body>
+</html>
