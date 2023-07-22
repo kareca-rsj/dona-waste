@@ -1,1 +1,35 @@
-<h1>Ini edit</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Edit Profile</div>
+        <div class="card-body">
+          <form method="POST" action="{% url 'user_profile:edit_profile' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label>Username:</label>
+              <input type="text" name="username" value="{{user.username}}" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Email:</label>
+              <input type="text" name="email" value="{{user.email}}" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number:</label>
+              <input type="text" name="phone_number" value="{{user.profile.phone_number}}" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Password:</label>
+              <input type="password" name="password" placeholder="New password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
