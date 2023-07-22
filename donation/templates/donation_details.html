@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <html>
   <head>
     <title>DonaWaste - Donation Details</title>
@@ -5,8 +7,9 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-    <div class="container">
-        <h1 class="mb-4">Donation Details</h1>
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Donation Details</h2>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{donation.title}}</h5>
@@ -20,9 +23,9 @@
                     <br>
                     <strong>Status:</strong> 
                     {% if donation.status == True %}
-                        Open
+                        <span class="badge badge-success">Open</span>
                     {% else %}
-                        Closed
+                        <span class="badge badge-danger">Closed</span>
                     {% endif %}
                     <br>
                     <strong>Primary Key:</strong> {{donation.pk}}<br>
@@ -40,7 +43,7 @@
                     {% if donation.description %}
                         {{donation.description}}
                     {% else %}
-                        There is no description for this donation.
+                        <em>There is no description for this donation.</em>
                     {% endif %}
                 </p>
             </div>
@@ -48,8 +51,8 @@
 
         {% if donation.donator == logged_user %}
         <div class="text-center my-4">
-            <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-success">Edit Donation</a>
-            <a href="" class="btn btn-success">Close Donation</a>
+            <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-primary">Edit Donation</a>
+            <a href="" class="btn btn-danger">Close Donation</a>
         </div>
         {% endif %}
     </div>
@@ -57,4 +60,5 @@
     <!-- Include Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
+{% endblock content %}
 </html>
