@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from donation.models import *
 
 def show_available_donations(request):
-    context = {"donations": Donation.objects.all()}
+    context = {"donations": Donation.objects.filter(status=True).order_by("-datetime_created")}
     return render(request, "available_donations.html", context)
 
 def show_donation_details(request, id):

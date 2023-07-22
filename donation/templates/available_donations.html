@@ -13,21 +13,19 @@
     {% endif %}
 
     {% for donation in donations %}
-      {% if donation.status == True %}
-        <h3>{{donation.title}}</h3>
-        <b>Category:</b>
-        {% if donation.category %}
-          {{donation.category.name}}
-        {% else %}
-          Unspecified
-        {% endif %}
-        <br>
-        <b>Date and Time Created:</b> {{donation.datetime_created}}<br>
-        <b>Weight (grams):</b> {{donation.weight_grams}}<br><br>
-        <a href="{% url 'donation:show_donation_details' donation.pk %}">
-          <button type="button">See Details</button>
-        </a>
+      <h3>{{donation.title}}</h3>
+      <b>Category:</b>
+      {% if donation.category %}
+        {{donation.category.name}}
+      {% else %}
+        Unspecified
       {% endif %}
+      <br>
+      <b>Date and Time Created:</b> {{donation.datetime_created}}<br>
+      <b>Weight (grams):</b> {{donation.weight_grams}}<br><br>
+      <a href="{% url 'donation:show_donation_details' donation.pk %}">
+        <button type="button">See Details</button>
+      </a>
     {% endfor %}
 
   </body>

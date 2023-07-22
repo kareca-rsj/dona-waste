@@ -17,7 +17,7 @@
       {% endif %}
       <h3>Category</h3>
       {% for category in categories %}
-        <input type="radio" name="category" value="{{category.pk}}">{{category.name}}<br>
+        <input type="radio" name="category" value="{{category.pk}}" required>{{category.name}}<br>
       {% endfor %}
       <h3>Weight (grams)</h3>
       <input type="number" name="weight_grams" required>
