@@ -6,5 +6,5 @@ class User(AbstractUser):
     contact = models.CharField(default=False, null=True, max_length=13)
 
 class Point():
-    point_amount = models.PositiveIntegerField(default=False)
+    point_amount = models.FloatField(default=False)
     date = models.DateField(default=False)
