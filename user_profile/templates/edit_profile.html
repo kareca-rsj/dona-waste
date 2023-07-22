@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container text-center">
+  <h2 class="mb-4">Edit Profile</h2>
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">Edit Profile</div>
         <div class="card-body">
           <form method="POST" action="{% url 'user_profile:edit_profile' %}">
             {% csrf_token %}
@@ -21,7 +21,7 @@
               <label>Phone Number:</label>
               <input type="text" name="phone_number" value="{{user.profile.phone_number}}" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" class="btn btn-success">Save Changes</button>
           </form>
         </div>
       </div>
@@ -35,4 +35,5 @@
     </ul>
     {% endif %}
 </div>
+<br>
 {% endblock %}

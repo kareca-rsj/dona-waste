@@ -63,7 +63,7 @@ def create_new_donation(request):
             longitude=longitude
         )
         new_donation.save()
-        return redirect("donation:show_available_donations")
+        return redirect("donation:show_my_donations")
     
     return render(request, "create_donation.html", context)
 

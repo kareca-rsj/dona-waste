@@ -10,43 +10,53 @@
 
     <div class="container mt-4">
         <h2 class="mb-4">Donation Details</h2>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{donation.title}}</h5>
-                <img src="{{donation.image_url}}">
+        <h2 class="mb-4 text-center">{{donation.title}}</h2>
+        <div class="row">
+            <div class="col col-lg-6">
+                <h5 class="mb-4">Item Image</h5>
+                <img src="{{donation.image_url}}" width="100%">
+                <br><br>
+                <h5 class="mb-4">Pickup Location</h5>
                 <div id="map" style="width:100%; height:400px;"></div>
-                <p class="card-text">
-                    <strong>Donator:</strong> {{donation.donator.username}}<br>
-                    <strong>Status:</strong> 
-                    {% if donation.status == True %}
-                        <span class="badge badge-success">Open</span>
-                    {% else %}
-                        <span class="badge badge-danger">Closed</span>
-                    {% endif %}
-                    <br>
-                    <strong>Category:</strong> {{donation.category.name}}<br>
-                    <strong>Date and Time Created:</strong> {{donation.datetime_created}}<br>
-                    <strong>Weight (grams):</strong> {{donation.weight_grams}}<br>
-                    <strong>Address:</strong> {{donation.address}}<br>
-                    <strong>Description:</strong>
-                    {% if donation.description %}
-                        {{donation.description}}
-                    {% else %}
-                        <em>There is no description for this donation.</em>
-                    {% endif %}
-                </p>
+            </div>
+            <div class="col col-lg-6">
+                <h5 class="mb-4">Item Information</h5>
+                <b>Status:</b> 
+                {% if donation.status == True %}
+                    <span class="badge badge-success">Open</span>
+                {% else %}
+                    <span class="badge badge-danger">Closed</span>
+                {% endif %}
+                <br>
+                <b>Category:</b> {{donation.category.name}}
+                <br>
+                <b>Date and Time Created:</b> {{donation.datetime_created}}
+                <br>
+                <b>Weight (grams):</b> {{donation.weight_grams}}
+                <br><br>
+                <h5 class="mb-4">Donator</h5>
+                <b>Donator:</b> {{donation.donator.username}}
+                <br>
+                <b>Email:</b> {{donation.donator.email}}
+                <br>
+                <b>Phone Number:</b> {{donation.donator.phone_number}}
+                <br><br>
+                <h5 class="mb-4">Description</h5>
+                {{donation.description}}
+                <br><br>
+                <h5 class="mb-4">Pickup Address</h5>
+                    {{donation.address}}
+                <br><br>
+                {% if donation.donator == logged_user and donation.status == True %}
+                <div class="text-center my-4">
+                    <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-success">Edit Donation</a>
+                    <a href="{% url 'donation:close_donation' donation.pk %}" class="btn btn-danger">Close Donation</a>
+                </div>
+                {% endif %}
             </div>
         </div>
-
-        {% if donation.donator == logged_user %}
-        <div class="text-center my-4">
-            <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-primary">Edit Donation</a>
-            {% if donation.status == True %}
-            <a href="{% url 'donation:close_donation' donation.pk %}" class="btn btn-danger">Close Donation</a>
-            {% endif %}
-        </div>
-        {% endif %}
     </div>
+    <br><br>
 
     <script>
         function myMap() {
