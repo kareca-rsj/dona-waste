@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
-{% block content %}
-<html>
-  <head>
-    <title>DonaWaste - Edit Donation</title>
-    <!-- Include Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body>
 
+{% block meta %}
+<title>Edit Donation</title>
+{% endblock meta %}
+
+{% block content %}
     <div class="container mt-4">
       <h2 class="mb-4">Donation</h2>
         <h2 class="mb-4 text-center">Edit Donation</h2>
@@ -105,8 +102,4 @@
     </script>
       
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR71Bdem7SpTRwVK1YBa3tNsBGDPkWTUg&callback=myMap"></script>
-    <!-- Include Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
 {% endblock content %}
-</html>
