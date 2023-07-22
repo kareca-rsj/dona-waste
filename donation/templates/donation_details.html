@@ -6,9 +6,7 @@
   </head>
   <body>
     <div class="container">
-        <a href="{% url 'donation:show_available_donations' %}" class="btn btn-primary my-3">See Available Donations</a>
         <h1 class="mb-4">Donation Details</h1>
-        {% for donation in donation %}
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{donation.title}}</h5>
@@ -48,10 +46,12 @@
             </div>
         </div>
 
+        {% if donation.donator == logged_user %}
         <div class="text-center my-4">
             <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-success">Edit Donation</a>
+            <a href="" class="btn btn-success">Close Donation</a>
         </div>
-        {% endfor %}
+        {% endif %}
     </div>
 
     <!-- Include Bootstrap JS -->

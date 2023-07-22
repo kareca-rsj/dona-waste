@@ -6,9 +6,6 @@
   </head>
   <body>
     <div class="container">
-        <a href="{% url 'donation:show_available_donations' %}">
-          <button type="button" class="btn btn-primary my-3">See Available Donations</button>
-        </a>
         <h1 class="mb-4">Create Donation</h1>
 
         <form method="POST" action="{% url 'donation:create_new_donation' %}">
