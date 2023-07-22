@@ -30,6 +30,8 @@ def create_new_donation(request):
     context = {"categories": Category.objects.all()}
 
     if request.method == "POST":
+        print(request.POST["latitude"])
+        print(request.POST["longitude"])
         title = request.POST["title"]
         category = Category.objects.get(pk=int(request.POST["category"]))
         weight_grams = int(request.POST["weight_grams"])

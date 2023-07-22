@@ -3,37 +3,34 @@ from django.contrib.auth.decorators import login_required
 from authentication.models import User
 from django.contrib import messages
 
-@login_required
+@login_required(login_url='/auth/login')
 def show_profile(request):
     current_user = request.user
     context = {"user" : current_user}
     return render(request, "profile.html", context)
 
-@login_required
+@login_required(login_url='/auth/login')
 def edit_profile(request):
     current_user = request.user
     context = {"user":current_user}
     
-    if (request.method == "PUT"):
-        username = request.PUT.get("username")
-        email = request.PUT.get("email")
-        password = request.PUT.get("password")
+    if (request.method == "POST"):
+        username = request.POST.get("username")
+        email = request.POST.get("email")
         
-        if (not validate_profile(current_user, username, email)):
+        if (validate_profile(current_user, username, email)):
             messages.info(request, message_list[validate_profile])
         
         else:
-            contact = request.PUT.get("contact").strip()
+            contact = request.POST.get("contact")
             if (contact == "" ):
                 current_user.contact = "-"
             else:
                 current_user.contact = contact
             current_user.username = username
-            current_user.email = request.PUT.get("email")
-            current_user.password = request.PUT.get("password")
+            current_user.email = email
             current_user.save()
-            return redirect("user_profile:")
-        
+            return redirect("user_profile:show_profile")
     return render(request, "edit_profile.html", context)
 
 # Utilities
