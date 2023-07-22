@@ -20,6 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('donation/', include('donation.urls')),
+    path('auth/', include('authentication.urls'))
 ]
-
-# TODO: Implement Routings Here
