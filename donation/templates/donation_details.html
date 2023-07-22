@@ -1,18 +1,23 @@
 <html>
   <head>
-    <title>DonaWaste - {{donation.title}}</title>
+    <title>DonaWaste - Donation Details</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
-        <a href="{% url 'donation:show_available_donations' %}" class="btn btn-primary my-3">See Available Donations</a>
         <h1 class="mb-4">Donation Details</h1>
-
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{donation.title}}</h5>
                 <p class="card-text">
+                    <strong>Donator:</strong>
+                    {% if donation.donator %}
+                      {{donation.donator.username}}
+                    {% else %}
+                      Anonymous
+                    {% endif %}
+                    <br>
                     <strong>Status:</strong> 
                     {% if donation.status == True %}
                         Open
@@ -41,9 +46,12 @@
             </div>
         </div>
 
+        {% if donation.donator == logged_user %}
         <div class="text-center my-4">
             <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-success">Edit Donation</a>
+            <a href="" class="btn btn-success">Close Donation</a>
         </div>
+        {% endif %}
     </div>
 
     <!-- Include Bootstrap JS -->
