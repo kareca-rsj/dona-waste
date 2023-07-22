@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 <html>
   <head>
     <title>DonaWaste - Edit Donation</title>
@@ -6,6 +6,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
+    {% block content %}
+
     <div class="container my-3">
         <a href="{% url 'donation:show_available_donations' %}" class="btn btn-primary">See Available Donations</a>
         <a href="{% url 'donation:show_donation_details' donation.pk %}" class="btn btn-secondary ml-2">Go Back</a>
@@ -63,6 +65,8 @@
             <button type="submit" class="btn btn-success">Save Changes</button>
         </form>
     </div>
+    {% endblock content %}
+
 
     <!-- Include Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

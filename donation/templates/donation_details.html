@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <html>
   <head>
     <title>DonaWaste - {{donation.title}}</title>
@@ -5,6 +6,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
+    {% block content %}
+
     <div class="container">
         <a href="{% url 'donation:show_available_donations' %}" class="btn btn-primary my-3">See Available Donations</a>
         <h1 class="mb-4">Donation Details</h1>
@@ -45,6 +48,8 @@
             <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-success">Edit Donation</a>
         </div>
     </div>
+    {% endblock content %}
+
 
     <!-- Include Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
