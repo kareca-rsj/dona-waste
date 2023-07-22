@@ -61,8 +61,8 @@
             
                   <nav id="navbar" class="navbar">
                     <ul>
-                      <li><a class="nav-link scrollto" href="{% url 'donation:show_available_donations' %}">Donation</a></li>
-                      <li><a class="nav-link scrollto" href="{% url 'donation:show_my_donations' %}">My Donation</a></li>
+                      <li><a class="nav-link scrollto" href="{% url 'donation:show_available_donations' %}">Available Donations</a></li>
+                      <li><a class="nav-link scrollto" href="{% url 'donation:show_my_donations' %}">My Donations</a></li>
                       <li><a class="nav-link scrollto" href="{% url 'user_profile:show_profile' %}">Profile</a></li>
                       <li><a class="getstarted scrollto" id="logout" href="{% url 'authentication:logout' %}">Logout</a></li>      
             
@@ -84,7 +84,7 @@
     
           <nav id="navbar" class="navbar">
             <ul>
-              <li><a class="nav-link scrollto" href="{% url 'donation:show_available_donations' %}">Donasi</a></li>
+              <li><a class="nav-link scrollto" href="{% url 'donation:show_available_donations' %}">Available Donations</a></li>
               <li><a class="getstarted scrollto" href="{% url 'authentication:login' %}">Login</a></li>
               <li><a class="getstarted scrollto" href="{% url 'authentication:register' %}">Register</a></li>
   
