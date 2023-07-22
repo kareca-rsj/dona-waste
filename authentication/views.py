@@ -18,10 +18,10 @@ def register_user(request):
             messages.info(request, "Email already taken!")
         elif (password != confirm_password):
             messages.info(request, "Your confirmed password is different!")
-        
-        user = User.objects.create_user(username=username, email=email, password=password)
-        user.save()
-        return redirect("authentication:login")
+        else:
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.save()
+            return redirect("authentication:login")
             
     return render(request, "register.html")
 
