@@ -6,5 +6,7 @@ app_name = "donation"
 urlpatterns = [
     path("", show_available_donations, name="show_available_donations"),
     path("available-donations/", show_available_donations, name="show_available_donations"),
-    path("create-donation/", create_new_donation, name="create_new_donation")
+    path("donation-details/<int:id>", show_donation_details, name="show_donation_details"),
+    path("create-donation/", create_new_donation, name="create_new_donation"),
+    path("edit-donation/<int:id>", edit_existing_donation, name="edit_existing_donation")
 ]

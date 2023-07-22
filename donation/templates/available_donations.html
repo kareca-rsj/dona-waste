@@ -3,6 +3,9 @@
     <title>DonaWaste - Available Donations</title>
   </head>
   <body>
+    <a href="{% url 'donation:create_new_donation' %}">
+      <button type="button">Create New Donation</button>
+    </a>
     <h1>Available Donations</h1>
 
     {% if not donations %}
@@ -10,12 +13,13 @@
     {% endif %}
 
     {% for donation in donations %}
-      {% if donation.status == true %}
-        <h4>{{donation.title}}</h4>
-        Date and Time Created: {{donation.datetime_created}}<br>
-        Weight (grams): {{donation.weight_grams}}<br>
-        Address: {{donation.address}}<br>
-        Description: {{donation.description}}
+      {% if donation.status == True %}
+        <h3>{{donation.title}}</h3>
+        <b>Date and Time Created:</b> {{donation.datetime_created}}<br>
+        <b>Weight (grams):</b> {{donation.weight_grams}}<br><br>
+        <a href="{% url 'donation:show_donation_details' donation.pk %}">
+          <button type="button">See Details</button>
+        </a>
       {% endif %}
     {% endfor %}
 

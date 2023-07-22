@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>DonaWaste - {{donation.title}}</title>
+  </head>
+  <body>
+    <a href="{% url 'donation:show_available_donations' %}">
+      <button type="button">See Available Donations</button>
+    </a>
+    <h1>Donation Details</h1>
+
+        <h3>{{donation.title}}</h3>
+        <b>Status:</b> 
+        {% if donation.status == True %}
+          Open
+        {% else %}
+          Closed
+        {% endif %}
+        <br>
+        <b>Primary Key:</b> {{donation.pk}}<br>
+        <b>Date and Time Created:</b> {{donation.datetime_created}}<br>
+        <b>Weight (grams):</b> {{donation.weight_grams}}<br>
+        <b>Address:</b> {{donation.address}}<br>
+        <b>Description:</b> {{donation.description}}<br><br>
+        <a href="{% url 'donation:edit_existing_donation' donation.pk %}">
+          <button type="button">Edit</button>
+        </a>
+
+  </body>
+</html>
