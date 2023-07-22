@@ -9,7 +9,7 @@ def show_available_donations(request):
 
 @login_required(login_url="authentication:login")
 def show_donation_details(request, id):
-    context = {"donation": Donation.objects.get(pk=id)}
+    context = {"donation": Donation.objects.filter(pk=id)}
     return render(request, "donation_details.html", context)
 
 @login_required(login_url="authentication:login")
@@ -33,6 +33,7 @@ def create_new_donation(request):
         datetime_created = datetime.now()
         new_donation = Donation(
             title=title,
+            donator=request.user,
             status=status,
             category=category,
             datetime_created=datetime_created,
@@ -45,6 +46,7 @@ def create_new_donation(request):
     
     return render(request, "create_donation.html", context)
 
+@login_required(login_url="authentication:login")
 def edit_existing_donation(request, id):
     context = {"categories": Category.objects.all()}
 
@@ -72,5 +74,5 @@ def edit_existing_donation(request, id):
         edited_donation.save()
         return redirect("donation:show_donation_details", id)
 
-    context["donation"] = Donation.objects.get(pk=id)
+    context["donation"] = Donation.objects.filter(pk=id)
     return render(request, "edit_donation.html", context)

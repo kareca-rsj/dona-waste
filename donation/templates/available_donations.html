@@ -19,6 +19,13 @@
 
     {% for donation in donations %}
       <h3>{{donation.title}}</h3>
+      <b>Donator:</b>
+      {% if donation.donator %}
+        {{donation.donator.username}}
+      {% else %}
+        Anonymous
+      {% endif %}
+      <br>
       <b>Category:</b>
       {% if donation.category %}
         {{donation.category.name}}
