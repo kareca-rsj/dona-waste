@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
+
+{% block meta %}
+{% if public == True %}
+<title>DonaWaste - Available Donations</title>
+{% else %}
+<title>DonaWaste - My Donations</title>
+{% endif %}
+{% endblock meta %}
+
 {% block content %}
-<html>
-  <head>
-    {% if public == True %}
-      <title>DonaWaste - Available Donations</title>
-    {% else %}
-      <title>DonaWaste - My Donations</title>
-    {% endif %}
-    <!-- Include Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body>
     <div class="container mt-4">
       <h2 class="mb-4">Donations</h2>
       {% if public == True %}
@@ -61,8 +59,4 @@
         </div>
       {% endfor %}
     </div>
-    <!-- Include Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
 {% endblock content %}
-</html>
