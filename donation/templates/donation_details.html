@@ -17,10 +17,23 @@
         {% endif %}
         <br>
         <b>Primary Key:</b> {{donation.pk}}<br>
+        <b>Category:</b>
+        {% if donation.category %}
+          {{donation.category.name}}
+        {% else %}
+          Unspecified
+        {% endif %}
+        <br>
         <b>Date and Time Created:</b> {{donation.datetime_created}}<br>
         <b>Weight (grams):</b> {{donation.weight_grams}}<br>
         <b>Address:</b> {{donation.address}}<br>
-        <b>Description:</b> {{donation.description}}<br><br>
+        <b>Description:</b>
+        {% if donation.description %}
+          {{donation.description}}
+        {% else %}
+          There is no description for this donation.
+        {% endif %}
+        <br><br>
         <a href="{% url 'donation:edit_existing_donation' donation.pk %}">
           <button type="button">Edit</button>
         </a>
