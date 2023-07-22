@@ -1,0 +1,58 @@
+<html>
+  <head>
+    {% if public == True %}
+      <title>DonaWaste - Available Donations</title>
+    {% else %}
+      <title>DonaWaste - My Donations</title>
+    {% endif %}
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      {% if public == True %}
+        <h1 class="mb-4">Available Donations</h1>
+        {% if not donations %}
+        <div class="alert alert-info" role="alert">
+          Sorry, there aren't any available donations. Please check again later.
+        </div>
+      {% endif %}
+      {% else %}
+        <h1 class="mb-4">My Donations</h1>
+        {% if not donations %}
+        <div class="alert alert-info" role="alert">
+          You haven't made any donations. Click the button below to make one.
+        </div>
+        {% endif %}
+        <a href="{% url 'donation:create_new_donation' %}">
+          <button type="button">Create Donation</button>
+        </a>
+      {% endif %}
+
+      {% for donation in donations %}
+        <h3>{{donation.title}}</h3>
+        <b>Donator:</b>
+        {% if donation.donator %}
+          {{donation.donator.username}}
+        {% else %}
+          Anonymous
+        {% endif %}
+        <br>
+        <b>Category:</b>
+        {% if donation.category %}
+          {{donation.category.name}}
+        {% else %}
+          Unspecified
+        {% endif %}
+        <br>
+        <b>Date and Time Created:</b> {{donation.datetime_created}}<br>
+        <b>Weight (grams):</b> {{donation.weight_grams}}<br><br>
+        <a href="{% url 'donation:show_donation_details' donation.pk %}">
+          <button type="button">See Details</button>
+        </a>
+      {% endfor %}
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
