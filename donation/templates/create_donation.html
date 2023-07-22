@@ -15,6 +15,10 @@
       {% if title_warning %}
       <br>{{title_warning}}
       {% endif %}
+      <h3>Category</h3>
+      {% for category in categories %}
+        <input type="radio" name="category" value="{{category.pk}}">{{category.name}}<br>
+      {% endfor %}
       <h3>Weight (grams)</h3>
       <input type="number" name="weight_grams" required>
       {% if weight_grams_warning %}
