@@ -13,14 +13,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{donation.title}}</h5>
+                <img src="{{donation.image_url}}">
+                <div id="map" style="width:100%; height:400px;"></div>
                 <p class="card-text">
-                    <strong>Donator:</strong>
-                    {% if donation.donator %}
-                      {{donation.donator.username}}
-                    {% else %}
-                      Anonymous
-                    {% endif %}
-                    <br>
+                    <strong>Donator:</strong> {{donation.donator.username}}<br>
                     <strong>Status:</strong> 
                     {% if donation.status == True %}
                         <span class="badge badge-success">Open</span>
@@ -28,14 +24,7 @@
                         <span class="badge badge-danger">Closed</span>
                     {% endif %}
                     <br>
-                    <strong>Primary Key:</strong> {{donation.pk}}<br>
-                    <strong>Category:</strong>
-                    {% if donation.category %}
-                        {{donation.category.name}}
-                    {% else %}
-                        Unspecified
-                    {% endif %}
-                    <br>
+                    <strong>Category:</strong> {{donation.category.name}}<br>
                     <strong>Date and Time Created:</strong> {{donation.datetime_created}}<br>
                     <strong>Weight (grams):</strong> {{donation.weight_grams}}<br>
                     <strong>Address:</strong> {{donation.address}}<br>
@@ -52,10 +41,27 @@
         {% if donation.donator == logged_user %}
         <div class="text-center my-4">
             <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-primary">Edit Donation</a>
-            <a href="" class="btn btn-danger">Close Donation</a>
+            {% if donation.status == True %}
+            <a href="{% url 'donation:close_donation' donation.pk %}" class="btn btn-danger">Close Donation</a>
+            {% endif %}
         </div>
         {% endif %}
     </div>
+
+    <script>
+        function myMap() {
+          var map = new google.maps.Map(document.getElementById("map"), {
+            center: new google.maps.LatLng("{{donation.latitude}}", "{{donation.longitude}}"),
+            zoom: 18,
+          });
+          var marker = new google.maps.Marker({
+            position: {lat: Number("{{donation.latitude}}"), lng: Number("{{donation.longitude}}")}
+          });
+          marker.setMap(map);
+        }
+      </script>
+        
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR71Bdem7SpTRwVK1YBa3tNsBGDPkWTUg&callback=myMap"></script>
 
     <!-- Include Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

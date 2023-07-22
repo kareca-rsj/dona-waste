@@ -33,23 +33,22 @@
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">{{donation.title}}</h5>
+            <img src="{{donation.image_url}}" width="200" height="200">
             <p class="card-text">
               <strong>Donator:</strong> 
-              {% if donation.donator %}
-                {{donation.donator.username}}
+              {{donation.donator.username}}
+              <br>
+              <strong>Status:</strong> 
+              {% if donation.status == True %}
+                  <span class="badge badge-success">Open</span>
               {% else %}
-                Anonymous
+                  <span class="badge badge-danger">Closed</span>
               {% endif %}
               <br>
               <strong>Category:</strong> 
-              {% if donation.category %}
-                {{donation.category.name}}
-              {% else %}
-                Unspecified
-              {% endif %}
+              {{donation.category.name}}
               <br>
               <strong>Date and Time Created:</strong> {{donation.datetime_created}}<br>
-              <strong>Weight (grams):</strong> {{donation.weight_grams}}
             </p>
             <a href="{% url 'donation:show_donation_details' donation.pk %}" class="btn btn-info">See Details</a>
           </div>
