@@ -1,0 +1,16 @@
+[
+    {
+        "model": "donation.category",
+        "pk": 1,
+        "fields": {
+            "name": "Organic"
+        }
+    },
+    {
+        "model": "donation.category",
+        "pk": 2,
+        "fields": {
+            "name": "Anorganic"
+        }
+    }
+]

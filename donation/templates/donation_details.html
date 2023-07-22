@@ -17,6 +17,14 @@
         {% endif %}
         <br>
         <b>Primary Key:</b> {{donation.pk}}<br>
+        <b>Category:</b>
+        {% if donation.category %}
+          {{donation.category.name}}
+        {% else %}
+          Unspecified
+        {% endif %}
+        <br>
+        {{donation.category.name}}<br>
         <b>Date and Time Created:</b> {{donation.datetime_created}}<br>
         <b>Weight (grams):</b> {{donation.weight_grams}}<br>
         <b>Address:</b> {{donation.address}}<br>
