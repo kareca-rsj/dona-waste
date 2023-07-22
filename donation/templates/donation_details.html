@@ -41,7 +41,9 @@
         {% if donation.donator == logged_user %}
         <div class="text-center my-4">
             <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-primary">Edit Donation</a>
-            <a href="" class="btn btn-danger">Close Donation</a>
+            {% if donation.status == True %}
+            <a href="{% url 'donation:close_donation' donation.pk %}" class="btn btn-danger">Close Donation</a>
+            {% endif %}
         </div>
         {% endif %}
     </div>

@@ -103,3 +103,13 @@ def edit_existing_donation(request, id):
 
     context["donation"] = Donation.objects.get(pk=id)
     return render(request, "edit_donation.html", context)
+
+@login_required(login_url="authentication:login")
+def close_donation(request, id):
+    donation = Donation.objects.get(pk=id)
+    donation.status = False
+    donation.save()
+    donator = donation.donator
+    donator.point += donation.weight_grams
+    donator.save()
+    return redirect("donation:show_donation_details", id)
