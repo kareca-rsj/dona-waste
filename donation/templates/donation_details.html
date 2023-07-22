@@ -1,42 +1,52 @@
 <html>
   <head>
     <title>DonaWaste - {{donation.title}}</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-    <a href="{% url 'donation:show_available_donations' %}">
-      <button type="button">See Available Donations</button>
-    </a>
-    <h1>Donation Details</h1>
+    <div class="container">
+        <a href="{% url 'donation:show_available_donations' %}" class="btn btn-primary my-3">See Available Donations</a>
+        <h1 class="mb-4">Donation Details</h1>
 
-        <h3>{{donation.title}}</h3>
-        <b>Status:</b> 
-        {% if donation.status == True %}
-          Open
-        {% else %}
-          Closed
-        {% endif %}
-        <br>
-        <b>Primary Key:</b> {{donation.pk}}<br>
-        <b>Category:</b>
-        {% if donation.category %}
-          {{donation.category.name}}
-        {% else %}
-          Unspecified
-        {% endif %}
-        <br>
-        <b>Date and Time Created:</b> {{donation.datetime_created}}<br>
-        <b>Weight (grams):</b> {{donation.weight_grams}}<br>
-        <b>Address:</b> {{donation.address}}<br>
-        <b>Description:</b>
-        {% if donation.description %}
-          {{donation.description}}
-        {% else %}
-          There is no description for this donation.
-        {% endif %}
-        <br><br>
-        <a href="{% url 'donation:edit_existing_donation' donation.pk %}">
-          <button type="button">Edit</button>
-        </a>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{donation.title}}</h5>
+                <p class="card-text">
+                    <strong>Status:</strong> 
+                    {% if donation.status == True %}
+                        Open
+                    {% else %}
+                        Closed
+                    {% endif %}
+                    <br>
+                    <strong>Primary Key:</strong> {{donation.pk}}<br>
+                    <strong>Category:</strong>
+                    {% if donation.category %}
+                        {{donation.category.name}}
+                    {% else %}
+                        Unspecified
+                    {% endif %}
+                    <br>
+                    <strong>Date and Time Created:</strong> {{donation.datetime_created}}<br>
+                    <strong>Weight (grams):</strong> {{donation.weight_grams}}<br>
+                    <strong>Address:</strong> {{donation.address}}<br>
+                    <strong>Description:</strong>
+                    {% if donation.description %}
+                        {{donation.description}}
+                    {% else %}
+                        There is no description for this donation.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
 
+        <div class="text-center my-4">
+            <a href="{% url 'donation:edit_existing_donation' donation.pk %}" class="btn btn-success">Edit Donation</a>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

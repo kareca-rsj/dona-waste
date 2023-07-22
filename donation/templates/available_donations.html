@@ -1,16 +1,21 @@
 <html>
   <head>
     <title>DonaWaste - Available Donations</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-    <a href="{% url 'donation:create_new_donation' %}">
-      <button type="button">Create New Donation</button>
-    </a>
-    <h1>Available Donations</h1>
+    <div class="container">
+        <a href="{% url 'donation:create_new_donation' %}">
+          <button type="button" class="btn btn-primary my-3">Create New Donation</button>
+        </a>
+        <h1 class="mb-4">Available Donations</h1>
 
-    {% if not donations %}
-      Sorry, there aren't any available donations. Please check again later.
-    {% endif %}
+        {% if not donations %}
+          <div class="alert alert-info" role="alert">
+            Sorry, there aren't any available donations. Please check again later.
+          </div>
+        {% endif %}
 
     {% for donation in donations %}
       <h3>{{donation.title}}</h3>
@@ -28,5 +33,7 @@
       </a>
     {% endfor %}
 
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>
