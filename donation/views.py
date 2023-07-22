@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from donation.models import *
 
@@ -6,10 +7,12 @@ def show_available_donations(request):
     context = {"donations": Donation.objects.filter(status=True).order_by("-datetime_created")}
     return render(request, "available_donations.html", context)
 
+@login_required(login_url="authentication:login")
 def show_donation_details(request, id):
     context = {"donation": Donation.objects.get(pk=id)}
     return render(request, "donation_details.html", context)
 
+@login_required(login_url="authentication:login")
 def create_new_donation(request):
     context = {"categories": Category.objects.all()}
 
