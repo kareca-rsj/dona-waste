@@ -1,4 +1,3 @@
-"""
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
@@ -38,4 +37,3 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect("authentication:login")
-    """
