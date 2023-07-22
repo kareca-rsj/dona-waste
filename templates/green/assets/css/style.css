@@ -203,8 +203,25 @@ h6 {
   font-size: 14px;
 }
 
+.navbar .register,
+.navbar .register:focus {
+  color: #5cb874;
+  padding: 8px 25px;
+  margin-left: 30px;
+  border-radius: 4px;
+  border: 2px solid #5cb874;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
 .navbar .getstarted:hover,
 .navbar .getstarted:focus:hover {
+  background: #5cb874;
+  color: #fff;
+}
+
+.navbar .register:hover,
+.navbar .register:focus:hover {
   background: #5cb874;
   color: #fff;
 }
@@ -344,6 +361,11 @@ h6 {
 
 .navbar-mobile .getstarted,
 .navbar-mobile .getstarted:focus {
+  margin: 15px;
+}
+
+.navbar-mobile .register,
+.navbar-mobile .register:focus {
   margin: 15px;
 }
 
