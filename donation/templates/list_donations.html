@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+  <head>
+    {% if public == True %}
+      <title>DonaWaste - Available Donations</title>
+    {% else %}
+      <title>DonaWaste - My Donations</title>
+    {% endif %}
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container mt-4">
+      {% if public == True %}
+        <h2 class="mb-4">Available Donations</h2>
+        {% if not donations %}
+        <div class="alert alert-info" role="alert">
+          Sorry, there aren't any available donations. Please check again later.
+        </div>
+        {% endif %}
+      {% else %}
+        <h2 class="mb-4">My Donations</h2>
+        {% if not donations %}
+        <div class="alert alert-info" role="alert">
+          You haven't made any donations. Click the button below to make one.
+        </div>
+        {% endif %}
+        <a href="{% url 'donation:create_new_donation' %}" class="btn btn-primary mb-4">Create Donation</a>
+      {% endif %}
+
+      {% for donation in donations %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{donation.title}}</h5>
+            <p class="card-text">
+              <strong>Donator:</strong> 
+              {% if donation.donator %}
+                {{donation.donator.username}}
+              {% else %}
+                Anonymous
+              {% endif %}
+              <br>
+              <strong>Category:</strong> 
+              {% if donation.category %}
+                {{donation.category.name}}
+              {% else %}
+                Unspecified
+              {% endif %}
+              <br>
+              <strong>Date and Time Created:</strong> {{donation.datetime_created}}<br>
+              <strong>Weight (grams):</strong> {{donation.weight_grams}}
+            </p>
+            <a href="{% url 'donation:show_donation_details' donation.pk %}" class="btn btn-info">See Details</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+{% endblock content %}
+</html>
