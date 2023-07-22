@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>DonaWaste - Edit Donation</title>
+  </head>
+  <body>
+    <a href="{% url 'donation:show_available_donations' %}">
+      <button type="button">See Available Donations</button>
+    </a>
+    <a href="{% url 'donation:show_donation_details' donation.pk %}">
+        <button type="button">Go Back</button>
+      </a>
+    <h1>Edit Donation</h1>
+
+    <form method="POST" action="">
+      {% csrf_token %}
+      <h3>Title</h3>
+      <input type="text" name="title" value="{{donation.title}}" required>
+      {% if title_warning %}
+      <br>{{title_warning}}
+      {% endif %}
+      <h3>Weight (grams)</h3>
+      <input type="number" name="weight_grams" value="{{donation.weight_grams}}" required>
+      {% if weight_grams_warning %}
+      <br>{{weight_grams_warning}}
+      {% endif %}
+      <h3>Address</h3>
+      <input type="text" name="address" value="{{donation.address}}" required>
+      <h3>Description</h3>
+      <input type="text" name="description" value="{{donation.description}}">
+      <h3>Status</h3>
+      <input type="radio" name="status" value=True required>Open<br>
+      <input type="radio" name="status" value=False required>Closed
+      <br><br>
+      <input type="submit" value="Save Changes">
+    </form>
+
+  </body>
+</html>

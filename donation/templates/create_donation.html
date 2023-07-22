@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>DonaWaste - Create Donation</title>
+  </head>
+  <body>
+    <a href="{% url 'donation:show_available_donations' %}">
+      <button type="button">See Available Donations</button>
+    </a>
+    <h1>Create Donation</h1>
+
+    <form method="POST" action="{% url 'donation:create_new_donation' %}">
+      {% csrf_token %}
+      <h3>Title</h3>
+      <input type="text" name="title" required>
+      {% if title_warning %}
+      <br>{{title_warning}}
+      {% endif %}
+      <h3>Weight (grams)</h3>
+      <input type="number" name="weight_grams" required>
+      {% if weight_grams_warning %}
+      <br>{{weight_grams_warning}}
+      {% endif %}
+      <h3>Address</h3>
+      <input type="text" name="address" required>
+      <h3>Description</h3>
+      <input type="text" name="description">
+      <br><br>
+      <input type="submit" value="Create">
+    </form>
+
+  </body>
+</html>
