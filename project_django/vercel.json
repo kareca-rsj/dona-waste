@@ -1,13 +1,20 @@
 {
-    "builds": [{
-        "src": "project_django/wsgi.py",
-        "use": "@ardnt/vercel-python-wsgi",
-        "config": { "maxLambdaSize": "15mb" }
-    }],
+    "version": 2,
+    "name": "my-django-app",
+    "builds": [
+      {
+        "src": "api/index.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "50mb" }
+      }
+    ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "project_django/wsgi.py"
-        }
-    ]
-}
+      { "src": "/api/(.*)", "dest": "api/index.py" }
+    ],
+    "regions": ["sin"],
+    "env": {
+      "DJANGO_SECRET_KEY": "@django_secret_key",
+      "DATABASE_URL": "@database_url"
+    }
+  }
+  
