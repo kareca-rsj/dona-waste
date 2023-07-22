@@ -13,3 +13,6 @@ class Donation(models.Model):
     weight_grams = models.PositiveIntegerField()
     address = models.TextField()
     description = models.TextField(blank=True)
+    image_url = models.TextField(null=True)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)

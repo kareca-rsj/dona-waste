@@ -53,10 +53,56 @@
             <textarea class="form-control" id="description" name="description" rows="3">{{donation.description}}</textarea>
           </div>
 
+          <div class="form-group">
+            <label for="image_url">Image URL</label>
+            <textarea class="form-control" id="image_url" name="image_url" required>{{donation.image_url}}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="map">Pickup Location</label>
+            <div id="map" style="width:100%; height:400px;"></div>
+            {% if map_warning %}
+              <small id="weightHelp" class="form-text text-danger">{{map_warning}}</small>
+            {% endif %}
+            <input type="hidden" class="form-control" id="latitude" name="latitude" value="{{donation.latitude}}" required>
+            <input type="hidden" class="form-control" id="longitude" name="longitude" value="{{donation.longitude}}" required>
+          </div>
+
           <button type="submit" class="btn btn-success">Save Changes</button>
         </form>
 
     </div>
+
+    <script>
+      function myMap() {
+        var map = new google.maps.Map(document.getElementById("map"), {
+          center: new google.maps.LatLng("{{donation.latitude}}", "{{donation.longitude}}"),
+          zoom: 18,
+        });
+        
+        google.maps.event.addListener(map, 'click', function(event) {
+          addMarker(event.latLng, map);
+        });
+      
+        var markers = [];
+      
+        function addMarker(location, map) {
+          if(markers.length !== 0) {
+            markers[0].setMap(null);
+            markers.pop();
+          }
+          var newMarker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+          markers.push(newMarker);
+          document.getElementById('latitude').value = location.lat();
+          document.getElementById('longitude').value = location.lng();
+        }
+      }
+    </script>
+      
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR71Bdem7SpTRwVK1YBa3tNsBGDPkWTUg&callback=myMap"></script>
     <!-- Include Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>

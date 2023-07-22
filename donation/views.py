@@ -30,18 +30,21 @@ def create_new_donation(request):
     context = {"categories": Category.objects.all()}
 
     if request.method == "POST":
-        print(request.POST["latitude"])
-        print(request.POST["longitude"])
         title = request.POST["title"]
         category = Category.objects.get(pk=int(request.POST["category"]))
         weight_grams = int(request.POST["weight_grams"])
         address = request.POST["address"]
         description = request.POST["description"]
+        image_url = request.POST["image_url"]
+        latitude = request.POST["latitude"]
+        longitude = request.POST["longitude"]
         if len(title) > 100:
             context["title_warning"] = "Title must be no more than 100 characters long."
         if weight_grams <= 0:
             context["weight_grams_warning"] = "Weight must be more than 0 grams."
-        if "title_warning" in context or "weight_grams_warning" in context:
+        if not latitude or not longitude:
+            context["map_warning"] = "Please mark a pickup point on the map above."
+        if "title_warning" in context or "weight_grams_warning" in context or "map_warning" in context:
             return render(request, "create_donation.html", context)
         
         status = True
@@ -54,7 +57,10 @@ def create_new_donation(request):
             datetime_created=datetime_created,
             weight_grams=weight_grams,
             address=address,
-            description=description
+            description=description,
+            image_url=image_url,
+            latitude=latitude,
+            longitude=longitude
         )
         new_donation.save()
         return redirect("donation:show_available_donations")
@@ -71,11 +77,16 @@ def edit_existing_donation(request, id):
         weight_grams = int(request.POST["weight_grams"])
         address = request.POST["address"]
         description = request.POST["description"]
+        image_url = request.POST["image_url"]
+        latitude = request.POST["latitude"]
+        longitude = request.POST["longitude"]
         if len(title) > 100:
             context["title_warning"] = "Title must be no more than 100 characters long."
         if weight_grams <= 0:
             context["weight_grams_warning"] = "Weight must be more than 0 grams."
-        if "title_warning" in context or "weight_grams_warning" in context:
+        if not latitude or not longitude:
+            context["map_warning"] = "Please mark a pickup point on the map above."
+        if "title_warning" in context or "weight_grams_warning" in context or "map_warning" in context:
             return render(request, "create_donation.html", context)
         
         edited_donation = Donation.objects.get(pk=id)
@@ -84,6 +95,9 @@ def edit_existing_donation(request, id):
         edited_donation.weight_grams = weight_grams
         edited_donation.address = address
         edited_donation.description = description
+        edited_donation.image_url = image_url
+        edited_donation.latitude = latitude
+        edited_donation.longitude = longitude
         edited_donation.save()
         return redirect("donation:show_donation_details", id)
 
